@@ -9,7 +9,7 @@ router.get('/:action', filter.authorize);
 router.put('/:action', filter.authorize);
 router.delete('/:action', filter.authorize);
 /* GET spa page. */
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
     console.log('ceshiyixia');
     res.send({
         code: 200,
@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
         }
     })
 });
-router.get('/config', function (req, res) {
+router.get('/config', function(req, res) {
     res.send({
         code: 200,
         config: {
@@ -39,7 +39,8 @@ router.post('/login', (req, res) => {
                 message: "已登录！"
             });
         } else if (reg.test(name) && reg.test(pwd)) {
-            conn.query(`SELECT COUNT(1) as solution FROM admin where name="${name}" AND password="${common.md5(pwd)}"`, function (err, results, fields) {
+            conn = conn.connect();
+            conn.query(`SELECT COUNT(1) as solution FROM admin where name="${name}" AND password="${common.md5(pwd)}"`, function(err, results, fields) {
                 let result = results && results[0].solution;
                 if (result && result === 1) {
                     req.session.user = 'admin';

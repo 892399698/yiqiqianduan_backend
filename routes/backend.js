@@ -6,8 +6,8 @@ var config = require('../config/database');
 // var client = new mysql();
 var conn = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: '7910146'
+    user: config.database_user,
+    password: config.database_password
 });
 
 // client.user = config.database_name;
